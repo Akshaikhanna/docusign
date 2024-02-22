@@ -5,8 +5,8 @@ const fs = require('fs');
 const app = express();
 const port = 3000;
 
-const integratorKey = 'YOUR_INTEGRATOR_KEY';
-const clientSecret = 'YOUR_CLIENT_SECRET';
+const integratorKey = '7418c344-1e69-48ec-b6c4-ee730f13ae9b';
+const clientSecret = '22643e5c-8428-4c56-bf5e-d373fd718c42';
 const redirectUri = 'http://localhost:3000/callback';
 const basePath = 'https://demo.docusign.net/restapi';
 
@@ -28,7 +28,6 @@ const authUri = apiClient.getAuthorizationUri(
 function openAuthorizationUrl() {
   console.log('Please authorize the application by opening the URL below in your browser:');
   console.log(authUri);
-  // Open the authorization URL in the default browser or copy-paste it in a browser manually
 }
 
 async function performAuthFlow() {
@@ -63,10 +62,10 @@ async function createAndSignEnvelope() {
     dsApiClient.addDefaultHeader('Authorization', 'Bearer ' + refreshToken);
     const envelopesApi = new docusign.EnvelopesApi(dsApiClient);
 
-    // Read the PDF document
+    // PDF document
     const docPdfBytes = fs.readFileSync('path/to/your/document.pdf');
 
-    // Create the envelope definition
+    // Create the envelope 
     const env = new docusign.EnvelopeDefinition();
     env.emailSubject = 'Please sign this document';
 
@@ -80,15 +79,15 @@ async function createAndSignEnvelope() {
 
     // Create a signer recipient
     const signer1 = docusign.Signer.constructFromObject({
-      email: 'recipient@example.com', // Replace with the recipient's email
-      name: 'Recipient Name', // Replace with the recipient's name
-      clientUserId: '1001', // Replace with a unique identifier for the recipient
+      email: 'akshaikhanna123@gmail.com',
+      name: 'Akshai khanna', 
+      clientUserId: '1001', 
       recipientId: 1,
     });
 
     // Create signHere tab
     const signHere1 = docusign.SignHere.constructFromObject({
-      anchorString: '/sign1/', // Replace with an anchor string in your document
+      anchorString: '/sign1/', 
       anchorYOffset: '10',
       anchorUnits: 'pixels',
       anchorXOffset: '20',
@@ -109,7 +108,7 @@ async function createAndSignEnvelope() {
     // Set envelope status to sent
     env.status = 'sent';
 
-    // Call the Envelopes::create API to send the envelope
+    // Call the Envelopes
     const results = await envelopesApi.createEnvelope('accountId', { envelopeDefinition: env });
 
     console.log('Envelope created successfully. Envelope ID:', results.envelopeId);

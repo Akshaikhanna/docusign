@@ -28,7 +28,6 @@ const authUri = apiClient.getAuthorizationUri(
 function openAuthorizationUrl() {
   console.log('Please authorize the application by opening the URL below in your browser:');
   console.log(authUri);
-  // Open the authorization URL in the default browser or copy-paste it in a browser manually
 }
 
 async function performAuthFlow() {
@@ -80,15 +79,15 @@ async function createAndSignEnvelope() {
 
     // Create a signer recipient
     const signer1 = docusign.Signer.constructFromObject({
-      email: 'akshaikhanna@gmail.com', // Replace with the recipient's email
-      name: 'Akshai khanna', // Replace with the recipient's name
-      clientUserId: '1001', // Replace with a unique identifier for the recipient
+      email: 'akshaikhanna123@gmail.com', 
+      name: 'Akshai khanna',
+      clientUserId: '1001', 
       recipientId: 1,
     });
 
     // Create signHere tab
     const signHere1 = docusign.SignHere.constructFromObject({
-      anchorString: '/sign1/', // Replace with an anchor string in your document
+      anchorString: '/sign1/', 
       anchorYOffset: '10',
       anchorUnits: 'pixels',
       anchorXOffset: '20',
@@ -109,7 +108,7 @@ async function createAndSignEnvelope() {
     // Set envelope status to sent
     env.status = 'sent';
 
-    // Call the Envelopes::create API to send the envelope
+    // Call the Envelopes
     const results = await envelopesApi.createEnvelope('accountId', { envelopeDefinition: env });
 
     console.log('Envelope created successfully. Envelope ID:', results.envelopeId);
